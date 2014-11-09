@@ -12,9 +12,17 @@
 extern "C" {
 #endif
 
+#include <Generic.h>
 #include <uart.h>
 #include <spi.h>
 #include <pps.h>
+
+typedef enum
+{
+    ACCEL//,
+  //  EEPROM,
+  //  COMPASS
+}eDevices;
 
 //<editor-fold defaultstate="collapsed" desc="UART Configuration">
 #define TRIS_U1TX       (TRISBbits.TRISB14 = 0)
@@ -45,6 +53,19 @@ extern void UART2_Config(void);
 #endif
 //</editor-fold>
 
+//<editor-fold defaultstate="collapsed" desc="SPI Configuration">
+#define MAP_SCLK PPSOutput(OUT_FN_PPS_SCK1, OUT_PIN_PPS_RP8)//CLK
+#define MAP_MOSI PPSOutput(OUT_FN_PPS_SDO1, OUT_PIN_PPS_RP7)//MOSI
+#define MAP_MISO PPSInput(IN_FN_PPS_SDI1, IN_PIN_PPS_RP6)   //MISO
+
+#define TRIS_SCLK TRISBbits.TRISB8 = 0;//Clk
+#define TRIS_MOSI TRISBbits.TRISB7 = 0;//MOSI
+#define TRIS_MISO TRISBbits.TRISB6 = 1;//MISO
+
+extern void Setup_SPI1(void);
+extern void Send_SPI(BYTE * Data,int Len,eDevices Device);
+
+//</editor-fold>
 
 
 #ifdef	__cplusplus

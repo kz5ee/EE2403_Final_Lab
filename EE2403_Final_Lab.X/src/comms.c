@@ -1,5 +1,6 @@
 
 
+#include <stdio.h>
 #include "../inc/comms.h"
 
 
@@ -116,4 +117,53 @@ void UART2_Config(void){
 }
 //</editor-fold>
 
+//<editor-fold defaultstate="collapsed" desc="SPI Setup">
+void Setup_SPI1()
+{
+     OpenSPI1(
+            (
+            ENABLE_SCK_PIN  &//
+       //     FIFO_BUFFER_DISABLE      &
+            ENABLE_SDO_PIN          &//
+            SPI_MODE16_OFF          &//
+            SPI_SMP_ON            &//
+            SPI_CKE_ON             &//
+            SLAVE_ENABLE_OFF        &//
+            CLK_POL_ACTIVE_HIGH     &//
+            MASTER_ENABLE_ON        &//
+            SEC_PRESCAL_4_1         &//
+            PRI_PRESCAL_4_1//
+            )
+            ,
+            (
+            FRAME_ENABLE_OFF        &   //NOT USED
+            FRAME_SYNC_OUTPUT       &   //NOT USED
+            FRAME_POL_ACTIVE_HIGH   &   //NOT USED
+            FRAME_SYNC_EDGE_PRECEDE   //NOT USED
+
+            )
+            ,
+            (
+            SPI_ENABLE          &//
+            SPI_IDLE_CON        &//
+            SPI_RX_OVFLOW_CLR   //
+            )
+            );
+
+    ConfigIntSPI1(SPI_INT_EN & SPI_INT_PRI_5);
+
+    TRIS_SCLK;
+    TRIS_MOSI;
+    TRIS_MISO;
+
+    MAP_SCLK;
+    MAP_MOSI;
+    MAP_MISO;
+
+
+    printf("SPI1 Setup\r\n");
+    return;
+}
+
+//</editor-fold>
 

@@ -17,6 +17,7 @@
                    projectFiles="true">
       <logicalFolder name="f1" displayName="src" projectFiles="true">
         <itemPath>src/comms.c</itemPath>
+        <itemPath>src/chip_setup.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
     </logicalFolder>
