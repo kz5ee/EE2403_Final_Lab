@@ -10,6 +10,7 @@
 #include <p24Hxxxx.h>
 #include <libpic30.h>
 #include "inc/comms.h"
+#include "inc/globals.h"
 
 
 
@@ -31,7 +32,7 @@ _FICD( ICS_PGD1 & JTAGEN_OFF)
 int main(int argc, char** argv) {
     void Ludacris_Speed(void); //Make chip go fast
     Ludacris_Speed();
-    
+    InitGlobals();
     
     
     while(1)
