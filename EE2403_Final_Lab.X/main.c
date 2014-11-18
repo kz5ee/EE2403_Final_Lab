@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <p24Hxxxx.h>
+#include <libpic30.h>
 #include "inc/comms.h"
 
 
@@ -30,6 +31,14 @@ _FICD( ICS_PGD1 & JTAGEN_OFF)
 int main(int argc, char** argv) {
     void Ludacris_Speed(void); //Make chip go fast
     Ludacris_Speed();
+    
+    
+    
+    while(1)
+    {
+
+
+    }
 
     return (EXIT_SUCCESS);
 }
