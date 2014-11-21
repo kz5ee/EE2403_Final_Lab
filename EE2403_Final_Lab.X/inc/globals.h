@@ -16,10 +16,11 @@ extern "C" {
 
     extern volatile BYTE_VAL Flags;
 
-#define LOW_LEVEL(state)       Flags.bits.b0 = (state);
-#define LOW_MED_LEVEL(state)   Flags.bits.b1 = (state);
-#define MED_HI_LEVEL(state)    Flags.bits.b2 = (state);
-#define HI_LEVEL(state)        Flags.bits.b3 = (state);
+#define FLOW_LEVEL(state)       Flags.bits.b0 = (state);
+#define FLOW_MED_LEVEL(state)   Flags.bits.b1 = (state);
+#define FMED_HI_LEVEL(state)    Flags.bits.b2 = (state);
+#define FHI_LEVEL(state)        Flags.bits.b3 = (state);
+#define COMMANDRCD(state)       Flags.bits.b4 = (state);
 
     extern void InitGlobals(void);
 

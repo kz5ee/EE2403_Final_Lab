@@ -12,6 +12,7 @@
 extern "C" {
 #endif
 
+#include <p24Hxxxx.h>
 #include <Generic.h>
 #include <uart.h>
 #include <spi.h>
@@ -40,7 +41,7 @@ typedef enum
 
 extern void UART1_Config(void);
 
-#define __U1BAUD_ 38400 //<--- Desired Baud rate UART1 CHANGE THIS
+#define __U1BAUD_ 9600L //<--- Desired Baud rate UART1 CHANGE THIS
 #define __BAUDUART1_ ((__FTCY_/(16*__U1BAUD_))-1)
 
 #ifdef _U2RXIF
