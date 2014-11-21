@@ -59,5 +59,7 @@ void Process_CMD(void)
     {
         LATBbits.LATB5 = 0;
     }
+
+    COMMANDRCD = 0;
     return;
 }

@@ -22,6 +22,8 @@ extern "C" {
 #define FHI_LEVEL        Flags.bits.b3
 #define COMMANDRCD       Flags.bits.b4
 
+#define PUMP(state)      LATBbits.LATB5 = (state);
+
     extern void InitGlobals(void);
     extern void Process_CMD(void);
 
