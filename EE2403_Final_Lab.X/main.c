@@ -33,11 +33,12 @@ int main(int argc, char** argv) {
     void Ludacris_Speed(void); //Make chip go fast
     Ludacris_Speed();
     InitGlobals();
-    
+
     
     while(1)
     {
-
+        if(COMMANDRCD == 1)
+        { Process_CMD(); }
 
     }
 

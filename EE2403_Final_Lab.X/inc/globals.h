@@ -16,15 +16,17 @@ extern "C" {
 
     extern volatile BYTE_VAL Flags;
 
-#define FLOW_LEVEL(state)       Flags.bits.b0 = (state);
-#define FLOW_MED_LEVEL(state)   Flags.bits.b1 = (state);
-#define FMED_HI_LEVEL(state)    Flags.bits.b2 = (state);
-#define FHI_LEVEL(state)        Flags.bits.b3 = (state);
-#define COMMANDRCD(state)       Flags.bits.b4 = (state);
+#define FLOW_LEVEL       Flags.bits.b0
+#define FLOW_MED_LEVEL   Flags.bits.b1
+#define FMED_HI_LEVEL    Flags.bits.b2
+#define FHI_LEVEL        Flags.bits.b3
+#define COMMANDRCD       Flags.bits.b4
 
     extern void InitGlobals(void);
+    extern void Process_CMD(void);
 
-    extern unsigned char command[13];
+    extern char command[13];
+    extern volatile unsigned int Index;
 
 
 #ifdef	__cplusplus
