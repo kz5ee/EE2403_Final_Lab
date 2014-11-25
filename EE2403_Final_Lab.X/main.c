@@ -8,9 +8,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <p24Hxxxx.h>
-#include <libpic30.h>
 #include "inc/comms.h"
 #include "inc/globals.h"
+#include "inc/chip_setup.h"
 
 /*
  * Words of Power
@@ -30,40 +30,50 @@ int main(int argc, char** argv) {
     void Ludacris_Speed(void); //Make chip go fast
     Ludacris_Speed();
     InitGlobals();
-
+    //Setup_GO();
+    UART1_Config();
+    IO_Setup();
+    Timer1_Setup();
+    printf("Ready\n");
+    
     
     while(1)
     {
+        //Nop();
         if(COMMANDRCD == 1)
-        { Process_CMD(); }
-        if(FHI_LEVEL == 1)
         {
-            printf("High level detected.  Turning on pump.\n");
-            PUMP(1)
-            printf("Pump on.\n");
+            printf("Processing Command\r\n");
+            Process_CMD();
         }
-        if(FMED_HI_LEVEL == 1)
-        {
-            printf("Level is at 2 feet.\n");
-        }
-        if(FLOW_MED_LEVEL == 1)
-        {
-            printf("Level is at 2 feet.\n");
 
-            if(PORTBbits.RB5 == 1)
-            {
-                printf("Turning pump off.\n");
-                PUMP(0)
-            }
-        }
-        if(FLOW_LEVEL == 1)
-        {
-            printf("Level is at 1 foot.\n");
-        }
-        if ((FLOW_LEVEL == 0) && (!FLOW_MED_LEVEL || !FMED_HI_LEVEL || !FHI_LEVEL))
-        {
-            printf("Tank is empty.\n");
-        }
+//        if(FHI_LEVEL == 1)
+//        {
+//            printf("High level detected.  Turning on pump.\n");
+//            PUMP(1)
+//            printf("Pump on.\n");
+//        }
+//        if(FMED_HI_LEVEL == 1)
+//        {
+//            printf("Level is at 2 feet.\n");
+//        }
+//        if(FLOW_MED_LEVEL == 1)
+//        {
+//            printf("Level is at 2 feet.\n");
+//
+//            if(PORTBbits.RB5 == 1)
+//            {
+//                printf("Turning pump off.\n");
+//                PUMP(0)
+//            }
+//        }
+//        if(FLOW_LEVEL == 1)
+//        {
+//            printf("Level is at 1 foot.\n");
+//        }
+//        if ((FLOW_LEVEL == 0) && (!FLOW_MED_LEVEL || !FMED_HI_LEVEL || !FHI_LEVEL))
+//        {
+//            printf("Tank is empty.\n");
+//        }
 
     }
 

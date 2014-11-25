@@ -27,21 +27,24 @@ void Process_CMD(void)
         command[i] = tolower(command[i]); //make lower case
     }
 
-    if(strcmp(command,"report level") == 0)
+    //printf("%s\r\n", command);
+    //printf("%d\r\n", strncmp(command,"report level", 12));
+    
+    if(strncmp(command,"report level", 12) == 0)
     {
         if(FLOW_LEVEL == 1)
         {
             printf("Level is at 1 foot.\n");
         }
-        else if(FLOW_LEVEL == 1)
+        else if(FLOW_MED_LEVEL == 1)
         {
             printf("Level is at 2 feet.\n");
         }
-        else if(FLOW_LEVEL == 1)
+        else if(FMED_HI_LEVEL == 1)
         {
             printf("Level is at 3 feet.\n");
         }
-        else if(FLOW_LEVEL == 1)
+        else if(FHI_LEVEL == 1)
         {
             printf("Level is at 4 feet.\n");
         }
@@ -51,11 +54,11 @@ void Process_CMD(void)
         }
 
     }
-    if(strcmp(command,"pump on") == 0)
+    if(strncmp(command,"pump on", 12) == 0)
     {
         LATBbits.LATB5 = 1;
     }
-    if(strcmp(command,"pump off") == 0)
+    if(strncmp(command,"pump off", 12) == 0)
     {
         LATBbits.LATB5 = 0;
     }

@@ -7,7 +7,10 @@
 
 void Setup_GO(void)
 {
+    UART1_Config();
     Timer1_Setup();
+    IO_Setup();
+    
 
     return;
 }
@@ -25,7 +28,7 @@ inline void Timer1_Setup(void)
 
     ConfigIntTimer1(
             T1_INT_PRIOR_3 &
-            T1_INT_OFF
+            T1_INT_ON
                     );
 
 
@@ -35,7 +38,8 @@ inline void Timer1_Setup(void)
 
 void IO_Setup(void)
 {
-    AD1PCFGL = 0xFFFF;
+    _CNIE = 1;
+    AD1PCFGL = 0xffff;
 
     //RB5 is output for relay.
     TRISBbits.TRISB5 = 0;
@@ -50,6 +54,8 @@ void IO_Setup(void)
     CNEN2bits.CN22IE = 1;
     CNEN2bits.CN23IE = 1;
     CNEN2bits.CN24IE = 1;
+
+    printf("I/O Setup\r\n");
 
     return;
 }

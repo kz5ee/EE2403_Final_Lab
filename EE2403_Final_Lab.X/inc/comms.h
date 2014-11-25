@@ -26,10 +26,10 @@ typedef enum
 }eDevices;
 
 //<editor-fold defaultstate="collapsed" desc="UART Configuration">
-#define TRIS_U1TX       (TRISBbits.TRISB14 = 0)
-#define TRIS_U1RX       (TRISBbits.TRISB15 = 1)
-#define MAP_U1TX        (PPSOutput(OUT_FN_PPS_U1TX, OUT_PIN_PPS_RP14))
-#define MAP_U1RX        (PPSInput(IN_FN_PPS_U1RX, IN_PIN_PPS_RP15))
+#define TRIS_U1TX       (TRISBbits.TRISB15 = 0)
+#define TRIS_U1RX       (TRISBbits.TRISB14 = 1)
+#define MAP_U1TX        (PPSOutput(OUT_FN_PPS_U1TX, OUT_PIN_PPS_RP15))
+#define MAP_U1RX        (PPSInput(IN_FN_PPS_U1RX, IN_PIN_PPS_RP14))
 
 #define TRIS_U2TX       (TRISBbits.TRISB8 = 0)
 #define TRIS_U2RX       (TRISBbits.TRISB10 = 1)

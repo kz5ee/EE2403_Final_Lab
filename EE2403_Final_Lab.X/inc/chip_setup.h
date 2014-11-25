@@ -14,6 +14,7 @@ extern "C" {
 
 
     extern void Timer1_Setup(void);
+    extern void Setup_GO(void);
     extern void IO_Setup(void);
     
 
