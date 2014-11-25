@@ -27,7 +27,7 @@ void Process_CMD(void)
         command[i] = tolower(command[i]); //make lower case
     }
 
-    //printf("%s\r\n", command);
+    printf("Command Entered:  %s\r\n", command);
     //printf("%d\r\n", strncmp(command,"report level", 12));
     
     if(strncmp(command,"report level", 12) == 0)
@@ -54,13 +54,29 @@ void Process_CMD(void)
         }
 
     }
-    if(strncmp(command,"pump on", 12) == 0)
+//    if(command == "pump on")
+//    {
+//        printf("%d\r\n", strncmp(command,"pump on", 7));
+//    }
+//    else
+//    {
+//       printf("%d\r\n", strncmp(command,"pump off", 7));
+//    }
+    
+    
+    if(strncmp(command,"pump on", 7) == 0)
     {
         LATBbits.LATB5 = 1;
+        printf("Turning pump on.\r\n");
     }
-    if(strncmp(command,"pump off", 12) == 0)
+    if(strncmp(command,"pump off", 7) == 0)
     {
         LATBbits.LATB5 = 0;
+        printf("Turning pump off.\r\n");
+    }
+    if(strncmp(command,"pump state", 10) == 0)
+    {
+        printf("Pump State:  %d\r\n", PORTBbits.RB5);
     }
 
     COMMANDRCD = 0;
