@@ -7,10 +7,11 @@
 volatile BYTE_VAL Flags;
 char command[13];
 volatile unsigned int Index;
+_TANKLEVEL TankLevel;
 
 void InitGlobals(void)
 {
-
+    TankLevel = EMPTY;
     Flags.Val = 0;
     Index = 0;
     memset(command, '\0', sizeof(command));
@@ -80,5 +81,45 @@ void Process_CMD(void)
     }
 
     COMMANDRCD = 0;
+    return;
+}
+
+void ReportLevelChanged(void)
+{
+    LEVELCHANGED = 0;
+    switch (TankLevel)
+    {
+        case EMPTY:
+            printf("Tank is empty.\n");
+            break;
+        case LOW:
+            printf("Level is at 1 foot.\n");
+            break;
+        case LOWMED:
+            printf("Level is at 2 feet.\n");
+            break;
+        case MEDHI:
+            printf("Level is at 3 feet.\n");
+            break;
+        case HI:
+            printf("Level is at 4 feet.\n");
+            break;
+        default:
+            printf("Level is unknown.\n");
+            break;
+    }
+
+    if( TankLevel == HI && PORTBbits.RB5 != 1)
+    {
+        printf("Turning pump on.\r\n");
+        PUMP(1)
+    }
+    else if (TankLevel != HI && PORTBbits.RB5 == 1)
+    {
+        printf("Turning pump off.\r\n");
+        PUMP(0)
+    }
+
+
     return;
 }

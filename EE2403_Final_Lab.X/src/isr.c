@@ -9,23 +9,17 @@ void __attribute__((interrupt,auto_psv)) _ISR _T1Interrupt(void)
     T1CONbits.TON = 0;
 
     if(PORTBbits.RB6 == 1)
-    { FHI_LEVEL = 1; }
+    { TankLevel = HI; }
     if(PORTBbits.RB7 == 1)
-    { FMED_HI_LEVEL = 1; }
+    { TankLevel = MEDHI; }
     if(PORTBbits.RB8 == 1)
-    { FLOW_MED_LEVEL = 1; }
+    { TankLevel = LOWMED; }
     if(PORTBbits.RB9 == 1)
-    { FLOW_LEVEL = 1; }
+    { TankLevel = LOW; }
+    else
+    { TankLevel = EMPTY;}
 
-    if(PORTBbits.RB6 == 0)
-    { FHI_LEVEL = 0; }
-    if(PORTBbits.RB7 == 0)
-    { FMED_HI_LEVEL = 0; }
-    if(PORTBbits.RB8 == 0)
-    { FLOW_MED_LEVEL = 0; }
-    if(PORTBbits.RB9 == 0)
-    { FLOW_LEVEL = 0; }
-
+    LEVELCHANGED = 1;
     
     return;
 }

@@ -21,14 +21,31 @@ extern "C" {
 #define FMED_HI_LEVEL    Flags.bits.b2
 #define FHI_LEVEL        Flags.bits.b3
 #define COMMANDRCD       Flags.bits.b4
+#define LEVELCHANGED     Flags.bits.b5
 
 #define PUMP(state)      LATBbits.LATB5 = (state);
 
     extern void InitGlobals(void);
     extern void Process_CMD(void);
+    extern void ReportLevelChanged(void);
 
     extern char command[13];
     extern volatile unsigned int Index;
+
+//    typedef enum {
+//        LEVELCHANGED=0,
+//
+//    };
+
+    typedef enum {
+        EMPTY =0,
+                LOW,
+                LOWMED,
+                MEDHI,
+                HI
+    }_TANKLEVEL;
+
+    extern _TANKLEVEL TankLevel;
 
 
 #ifdef	__cplusplus
