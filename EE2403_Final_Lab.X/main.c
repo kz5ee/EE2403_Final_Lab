@@ -4,10 +4,13 @@
  *
  * Created on November 5, 2014, 12:11 PM
  */
+#define FOSC        (80000000ULL)
+#define FCY         (FOSC/2)
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <p24Hxxxx.h>
+#include <libpic30.h>
 #include "inc/comms.h"
 #include "inc/globals.h"
 #include "inc/chip_setup.h"
@@ -39,18 +42,19 @@ int main(int argc, char** argv) {
     
     while(1)
     {
+
+//        __delay_ms(1000);
+//        LATBbits.LATB5 ^= 1;
         //Nop();
         if(COMMANDRCD == 1)
         {
-            printf("Processing Command\r\n");
+            //printf("Processing Command\r\n");
             Process_CMD();
         }
         if (LEVELCHANGED)
         {
             ReportLevelChanged();
         }
-
-
 
     }
 
