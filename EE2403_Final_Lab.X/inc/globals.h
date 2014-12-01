@@ -13,6 +13,8 @@ extern "C" {
 #endif
 
 #include <Generic.h>
+#define FOSC        (80000000ULL)
+#define FCY         (FOSC/2)
 
     extern volatile BYTE_VAL Flags;
 
@@ -28,6 +30,7 @@ extern "C" {
     extern void InitGlobals(void);
     extern void Process_CMD(void);
     extern void ReportLevelChanged(void);
+    extern void SystemsTest(void);
 
     extern char command[13];
     extern volatile unsigned int Index;

@@ -10,7 +10,6 @@ void Setup_GO(void)
     UART1_Config();
     Timer1_Setup();
     IO_Setup();
-    
 
     return;
 }

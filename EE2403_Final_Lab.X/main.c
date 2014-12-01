@@ -4,13 +4,12 @@
  *
  * Created on November 5, 2014, 12:11 PM
  */
-#define FOSC        (80000000ULL)
-#define FCY         (FOSC/2)
+
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <p24Hxxxx.h>
-#include <libpic30.h>
+//#include <libpic30.h>
 #include "inc/comms.h"
 #include "inc/globals.h"
 #include "inc/chip_setup.h"
@@ -33,10 +32,8 @@ int main(int argc, char** argv) {
     void Ludacris_Speed(void); //Make chip go fast
     Ludacris_Speed();
     InitGlobals();
-    //Setup_GO();
-    UART1_Config();
-    IO_Setup();
-    Timer1_Setup();
+    Setup_GO();
+    SystemsTest();
     printf("Ready\n");
     
     

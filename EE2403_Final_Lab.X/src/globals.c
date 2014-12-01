@@ -3,6 +3,8 @@
 #include <ctype.h>
 #include <string.h>
 #include "../inc/globals.h"
+#include <libpic30.h>
+
 
 volatile BYTE_VAL Flags;
 char command[13];
@@ -119,6 +121,40 @@ void ReportLevelChanged(void)
         printf("Turning pump off.\r\n");
         PUMP(0)
     }
+
+
+    return;
+}
+
+void SystemsTest(void)
+{
+    int i;
+    printf("Systems Test in progress\n");
+
+    printf("Checking Inputs and Outputs.");
+
+    for(i=0; i<=4; i++)
+    {
+        __delay_ms(1000);
+        printf(".");
+        if(i==4)
+        { printf("OK\r\n"); }
+    }
+
+    printf("Testing pump.");
+    PUMP(1)
+    for(i=0;i<9;i++)
+    {
+        printf(".");
+        if(i==9)
+        {
+            printf("OK\r\n");
+            PUMP(0)
+        }
+    }
+
+    printf("Systems Test complete.\r\nMay the Force be with you.\r\n");
+
 
 
     return;
