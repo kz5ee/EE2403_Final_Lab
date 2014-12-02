@@ -30,24 +30,25 @@ void Process_CMD(void)
         command[i] = tolower(command[i]); //make lower case
     }
 
-    printf("Command Entered:  %s\r\n", command);
+    printf("OK\r\n");
+    //printf("Command Entered:  %s\r\n", command);
     //printf("%d\r\n", strncmp(command,"report level", 12));
     
     if(strncmp(command,"report level", 12) == 0)
     {
-        if(FLOW_LEVEL == 1)
+        if(TankLevel == LOW)
         {
             printf("Level is at 1 foot.\n");
         }
-        else if(FLOW_MED_LEVEL == 1)
+        else if(TankLevel == LOWMED)
         {
             printf("Level is at 2 feet.\n");
         }
-        else if(FMED_HI_LEVEL == 1)
+        else if(TankLevel == MEDHI)
         {
             printf("Level is at 3 feet.\n");
         }
-        else if(FHI_LEVEL == 1)
+        else if(TankLevel == HI)
         {
             printf("Level is at 4 feet.\n");
         }
@@ -57,14 +58,6 @@ void Process_CMD(void)
         }
 
     }
-//    if(command == "pump on")
-//    {
-//        printf("%d\r\n", strncmp(command,"pump on", 7));
-//    }
-//    else
-//    {
-//       printf("%d\r\n", strncmp(command,"pump off", 7));
-//    }
     
     
     if(strncmp(command,"pump on", 7) == 0)
@@ -72,14 +65,18 @@ void Process_CMD(void)
         LATBbits.LATB5 = 1;
         printf("Turning pump on.\r\n");
     }
-    if(strncmp(command,"pump off", 7) == 0)
+    else if(strncmp(command,"pump off", 7) == 0)
     {
         LATBbits.LATB5 = 0;
         printf("Turning pump off.\r\n");
     }
-    if(strncmp(command,"pump state", 10) == 0)
+    else if(strncmp(command,"pump state", 10) == 0)
     {
         printf("Pump State:  %d\r\n", PORTBbits.RB5);
+    }
+    else
+    {
+        printf("Unrecognized Command\r\n");
     }
 
     COMMANDRCD = 0;
@@ -116,7 +113,7 @@ void ReportLevelChanged(void)
         printf("Turning pump on.\r\n");
         PUMP(1)
     }
-    else if (TankLevel != HI && PORTBbits.RB5 == 1)
+    else if (TankLevel == LOWMED && PORTBbits.RB5 == 1)
     {
         printf("Turning pump off.\r\n");
         PUMP(0)
@@ -131,7 +128,7 @@ void SystemsTest(void)
     int i;
     printf("Systems Test in progress\n");
 
-    printf("Checking Inputs and Outputs.");
+    printf("Checking Inputs and Outputs");
 
     for(i=0; i<=4; i++)
     {
@@ -141,10 +138,13 @@ void SystemsTest(void)
         { printf("OK\r\n"); }
     }
 
-    printf("Testing pump.");
+    __delay_ms(1500);
+
+    printf("Testing pump");
     PUMP(1)
-    for(i=0;i<9;i++)
+    for(i=0;i<=9;i++)
     {
+        __delay_ms(1000);
         printf(".");
         if(i==9)
         {
@@ -153,7 +153,7 @@ void SystemsTest(void)
         }
     }
 
-    printf("Systems Test complete.\r\nMay the Force be with you.\r\n");
+    printf("Systems Test complete.\r\nMay the Schwartz be with you.\r\n");
 
 
 

@@ -2,24 +2,40 @@
 #include <stdio.h>
 #include "../inc/globals.h"
 
+static int debounce = 0; //If a level is set, we want to make sure
+                         //it has actually changed.
+
 void __attribute__((interrupt,auto_psv)) _ISR _T1Interrupt(void)
 {
     _T1IF = 0;
     //U1TXREG = 0x27;
     T1CONbits.TON = 0;
 
-    if(PORTBbits.RB6 == 1)
-    { TankLevel = HI; }
-    if(PORTBbits.RB7 == 1)
-    { TankLevel = MEDHI; }
-    if(PORTBbits.RB8 == 1)
-    { TankLevel = LOWMED; }
-    if(PORTBbits.RB9 == 1)
-    { TankLevel = LOW; }
-    else
-    { TankLevel = EMPTY;}
 
-    LEVELCHANGED = 1;
+    if(TankLevel != EMPTY && CHANGECONFIRM != 1)
+    { debounce++; T1CONbits.TON = 1; /*printf("%d\n",debounce);*/}
+
+    
+
+    if(debounce == 100 && LEVELCHANGED != 1)
+    { CHANGECONFIRM = 1; debounce = 0; T1CONbits.TON = 0; }
+
+    if (CHANGECONFIRM == 1 || TankLevel == EMPTY)
+    {
+        if(PORTBbits.RB6 == 1)
+        { TankLevel = HI; }
+        if(PORTBbits.RB7 == 1)
+        { TankLevel = MEDHI; }
+        if(PORTBbits.RB8 == 1)
+        { TankLevel = LOWMED; }
+        if(PORTBbits.RB9 == 1)
+        { TankLevel = LOW; }
+        if(PORTBbits.RB6==0 && PORTBbits.RB7==0 && PORTBbits.RB8==0 && PORTBbits.RB9==0)
+        { TankLevel = EMPTY; }
+
+        LEVELCHANGED = 1;
+        CHANGECONFIRM = 0;
+    }
     
     return;
 }

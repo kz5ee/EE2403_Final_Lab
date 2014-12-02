@@ -31,7 +31,7 @@ inline void Timer1_Setup(void)
                     );
 
 
-    printf("Timer 1 setup\r\n");
+    //printf("Timer 1 setup\r\n");
     return;
 }
 
@@ -54,7 +54,7 @@ void IO_Setup(void)
     CNEN2bits.CN23IE = 1;
     CNEN2bits.CN24IE = 1;
 
-    printf("I/O Setup\r\n");
+    //printf("I/O Setup\r\n");
 
     return;
 }

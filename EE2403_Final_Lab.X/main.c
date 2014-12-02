@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
     InitGlobals();
     Setup_GO();
     SystemsTest();
-    printf("Ready\n");
+    //printf("Ready\n");
     
     
     while(1)
@@ -48,7 +48,7 @@ int main(int argc, char** argv) {
             //printf("Processing Command\r\n");
             Process_CMD();
         }
-        if (LEVELCHANGED)
+        if (LEVELCHANGED == 1)
         {
             ReportLevelChanged();
         }

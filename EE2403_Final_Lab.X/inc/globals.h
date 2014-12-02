@@ -24,6 +24,7 @@ extern "C" {
 #define FHI_LEVEL        Flags.bits.b3
 #define COMMANDRCD       Flags.bits.b4
 #define LEVELCHANGED     Flags.bits.b5
+#define CHANGECONFIRM    Flags.bits.b6  //make sure change has actually happened
 
 #define PUMP(state)      LATBbits.LATB5 = (state);
 
